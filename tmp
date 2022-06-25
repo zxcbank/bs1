@@ -1,0 +1,10 @@
+if event.type == pygame.KEYDOWN:
+    print(pygame.key.get_pressed())
+    if (event.key == pygame.K_w):
+        ASD.rect.y -= 10
+    if (event.key == pygame.K_s):
+        ASD.rect.y += 10
+    if (event.key == pygame.K_a):
+        ASD.rect.x -= 10
+    if (event.key == pygame.K_d):
+        ASD.rect.x += 10
