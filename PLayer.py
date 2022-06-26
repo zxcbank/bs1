@@ -17,4 +17,20 @@ class Player (pygame.sprite.Sprite):
         self.rect.x += self.speedx
         self.rect.y += self.speedy
 
+    def vchange(self, keys):
+        if keys[pygame.K_a] is True:
+            self.speedx = -3
+        elif keys[pygame.K_d] is True:
+            self.speedx = 3
+        else:
+            self.speedx = 0
+        if keys[pygame.K_w] is True:
+            self.speedy = -3
+        elif keys[pygame.K_s] is True:
+            self.speedy = 3
+        else:
+            self.speedy = 0
+
+
+
 

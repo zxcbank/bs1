@@ -1,28 +1,26 @@
-import pygame, Constants, plBullets
+import pygame, Constants, plBullets, time
 
-def playerMoment(ASD, plStrikes):
+
+def eventMoment(player, plStrikes, enemies):
     x = None
     for event in pygame.event.get():
         # check for closing window
         if event.type == pygame.QUIT:
             return False
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_a] is True:
-            ASD.speedx = -3
-        elif keys[pygame.K_d] is True:
-            ASD.speedx = 3
-        else:
-            ASD.speedx = 0
-        if keys[pygame.K_w] is True:
-            ASD.speedy = -3
-        elif keys[pygame.K_s] is True:
-            ASD.speedy = 3
-        else:
-            ASD.speedy = 0
 
-        #обработка для пуль
+        # изменение скорости игрока в завимсимости от клавиш
+        player.vchange(pygame.key.get_pressed())
+
+        # обработка для пуль
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
-            plStrikes.add(plBullets.plBullet(ASD.rect.x, ASD.rect.y, pos[0], pos[1]))
+            plStrikes.add(plBullets.plStrike(player.rect.x, player.rect.y, pos[0], pos[1]))
+
+        #обработка жизни врагов
+        for _ in enemies:
+            for i in plStrikes:
+                if (_.rect.x + 15 >= i.rect.x >= _.rect.x) and (_.rect.y + 15 >= i.rect.y >= _.rect.y):
+                    _.kill()
+                    i.kill()
 
     return True
